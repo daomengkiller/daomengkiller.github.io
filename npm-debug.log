@@ -1,0 +1,150 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'hexo-asset-image',
+1 verbose cli   '--save',
+1 verbose cli   '--force' ]
+2 info using npm@2.14.7
+3 info using node@v9.11.1
+4 warn using --force I sure hope you know what you are doing.
+5 verbose install initial load of D:\hexo\package.json
+6 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo\package.json
+7 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-deployer-git\package.json
+8 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-filter-flowchart\package.json
+9 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-filter-github-emojis\package.json
+10 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-fs\package.json
+11 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-archive\package.json
+12 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-category\package.json
+13 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-index\package.json
+14 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-json-content\package.json
+15 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-search\package.json
+16 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-generator-tag\package.json
+17 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-renderer-ejs\package.json
+18 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-renderer-marked\package.json
+19 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-renderer-mathjax\package.json
+20 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-renderer-stylus\package.json
+21 verbose installManyTop reading scoped package data from D:\hexo\node_modules\hexo-server\package.json
+22 verbose readDependencies loading dependencies from D:\hexo\package.json
+23 silly cache add args [ 'hexo-asset-image', null ]
+24 verbose cache add spec hexo-asset-image
+25 silly cache add parsed spec Result {
+25 silly cache add   raw: 'hexo-asset-image',
+25 silly cache add   scope: null,
+25 silly cache add   name: 'hexo-asset-image',
+25 silly cache add   rawSpec: '',
+25 silly cache add   spec: '*',
+25 silly cache add   type: 'range' }
+26 silly addNamed hexo-asset-image@*
+27 verbose addNamed "*" is a valid semver range for hexo-asset-image
+28 silly addNameRange { name: 'hexo-asset-image', range: '*', hasData: false }
+29 silly mapToRegistry name hexo-asset-image
+30 silly mapToRegistry using default registry
+31 silly mapToRegistry registry https://registry.npmjs.org/
+32 silly mapToRegistry uri https://registry.npmjs.org/hexo-asset-image
+33 verbose addNameRange registry:https://registry.npmjs.org/hexo-asset-image not in flight; fetching
+34 verbose request uri https://registry.npmjs.org/hexo-asset-image
+35 verbose request no auth needed
+36 info attempt registry request try #1 at 19:19:58
+37 verbose request id d00c75aaa105b28a
+38 verbose etag "587a41d6-e5c"
+39 verbose lastModified Sat, 14 Jan 2017 15:20:54 GMT
+40 http request GET https://registry.npmjs.org/hexo-asset-image
+41 http 304 https://registry.npmjs.org/hexo-asset-image
+42 verbose headers { date: 'Sun, 08 Apr 2018 11:19:42 GMT',
+42 verbose headers   via: '1.1 varnish',
+42 verbose headers   'cache-control': 'max-age=300',
+42 verbose headers   etag: '"587a41d6-e5c"',
+42 verbose headers   age: '1212',
+42 verbose headers   connection: 'keep-alive',
+42 verbose headers   'x-served-by': 'cache-hnd18749-HND',
+42 verbose headers   'x-cache': 'HIT',
+42 verbose headers   'x-cache-hits': '1',
+42 verbose headers   'x-timer': 'S1523186383.963769,VS0,VE0',
+42 verbose headers   vary: 'Accept-Encoding, Accept' }
+43 silly get cb [ 304,
+43 silly get   { date: 'Sun, 08 Apr 2018 11:19:42 GMT',
+43 silly get     via: '1.1 varnish',
+43 silly get     'cache-control': 'max-age=300',
+43 silly get     etag: '"587a41d6-e5c"',
+43 silly get     age: '1212',
+43 silly get     connection: 'keep-alive',
+43 silly get     'x-served-by': 'cache-hnd18749-HND',
+43 silly get     'x-cache': 'HIT',
+43 silly get     'x-cache-hits': '1',
+43 silly get     'x-timer': 'S1523186383.963769,VS0,VE0',
+43 silly get     vary: 'Accept-Encoding, Accept' } ]
+44 verbose etag https://registry.npmjs.org/hexo-asset-image from cache
+45 verbose get saving hexo-asset-image to C:\Users\X54H\AppData\Roaming\npm-cache\registry.npmjs.org\hexo-asset-image\.cache.json
+46 silly addNameRange number 2 { name: 'hexo-asset-image', range: '*', hasData: true }
+47 silly addNameRange versions [ 'hexo-asset-image', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+48 silly addNamed hexo-asset-image@0.0.3
+49 verbose addNamed "0.0.3" is a plain semver version for hexo-asset-image
+50 silly mapToRegistry name hexo-asset-image
+51 silly mapToRegistry using default registry
+52 silly mapToRegistry registry https://registry.npmjs.org/
+53 silly mapToRegistry uri https://registry.npmjs.org/hexo-asset-image
+54 verbose addRemoteTarball https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz not in flight; adding
+55 verbose addRemoteTarball [ 'https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz',
+55 verbose addRemoteTarball   '88e9515673812f0106d73fe0acedd944f8a8a651' ]
+56 info retry fetch attempt 1 at 19:19:59
+57 info attempt registry request try #1 at 19:19:59
+58 http fetch GET https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz
+59 http fetch 200 https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz
+60 silly fetchAndShaCheck shasum 88e9515673812f0106d73fe0acedd944f8a8a651
+61 verbose addTmpTarball C:\Users\X54H\AppData\Local\Temp\npm-3604-1ccd6954\registry.npmjs.org\hexo-asset-image\-\hexo-asset-image-0.0.3.tgz not in flight; adding
+62 verbose addTmpTarball already have metadata; skipping unpack for hexo-asset-image@0.0.3
+63 silly cache afterAdd hexo-asset-image@0.0.3
+64 verbose afterAdd C:\Users\X54H\AppData\Roaming\npm-cache\hexo-asset-image\0.0.3\package\package.json not in flight; writing
+65 verbose afterAdd C:\Users\X54H\AppData\Roaming\npm-cache\hexo-asset-image\0.0.3\package\package.json written
+66 silly install resolved [ { name: 'hexo-asset-image',
+66 silly install resolved     version: '0.0.3',
+66 silly install resolved     description: 'Give asset image in hexo a absolutely path automatically',
+66 silly install resolved     main: 'index.js',
+66 silly install resolved     scripts: { test: 'echo "Error: no test specified" && exit 1' },
+66 silly install resolved     keywords: [ 'hexo', 'iamge', 'asset', 'path' ],
+66 silly install resolved     author: { name: 'codefalling' },
+66 silly install resolved     license: 'MIT',
+66 silly install resolved     dependencies: { cheerio: '^0.19.0' },
+66 silly install resolved     gitHead: '566f1cc7edfeaf8595c041213b63a52fac0a1582',
+66 silly install resolved     _id: 'hexo-asset-image@0.0.3',
+66 silly install resolved     _shasum: '88e9515673812f0106d73fe0acedd944f8a8a651',
+66 silly install resolved     _from: 'hexo-asset-image@*',
+66 silly install resolved     _npmVersion: '4.0.5',
+66 silly install resolved     _nodeVersion: '7.4.0',
+66 silly install resolved     _npmUser: { name: 'codefalling', email: 'code.falling@gmail.com' },
+66 silly install resolved     dist:
+66 silly install resolved      { shasum: '88e9515673812f0106d73fe0acedd944f8a8a651',
+66 silly install resolved        tarball: 'https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz' },
+66 silly install resolved     maintainers: [ [Object] ],
+66 silly install resolved     _npmOperationalInternal:
+66 silly install resolved      { host: 'packages-18-east.internal.npmjs.com',
+66 silly install resolved        tmp: 'tmp/hexo-asset-image-0.0.3.tgz_1484407252006_0.02041446091607213' },
+66 silly install resolved     directories: {},
+66 silly install resolved     _resolved: 'https://registry.npmjs.org/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz' } ]
+67 info install hexo-asset-image@0.0.3 into D:\hexo
+68 info installOne hexo-asset-image@0.0.3
+69 verbose installOne of hexo-asset-image to D:\hexo not in flight; installing
+70 verbose lock using C:\Users\X54H\AppData\Roaming\npm-cache\_locks\hexo-asset-image-05a6e19daeaef367.lock for D:\hexo\node_modules\hexo-asset-image
+71 silly install write writing hexo-asset-image 0.0.3 to D:\hexo\node_modules\hexo-asset-image
+72 verbose stack Error: Cannot find module 'internal/util/types'
+72 verbose stack     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:548:15)
+72 verbose stack     at Function.Module._load (internal/modules/cjs/loader.js:475:25)
+72 verbose stack     at Module.require (internal/modules/cjs/loader.js:598:17)
+72 verbose stack     at require (internal/modules/cjs/helpers.js:11:18)
+72 verbose stack     at evalmachine.<anonymous>:31:26
+72 verbose stack     at Object.<anonymous> (D:\Program Files\nodejs\node_modules\npm\node_modules\cmd-shim\node_modules\graceful-fs\fs.js:11:1)
+72 verbose stack     at Module._compile (internal/modules/cjs/loader.js:654:30)
+72 verbose stack     at Object.Module._extensions..js (internal/modules/cjs/loader.js:665:10)
+72 verbose stack     at Module.load (internal/modules/cjs/loader.js:566:32)
+72 verbose stack     at tryModuleLoad (internal/modules/cjs/loader.js:506:12)
+73 verbose cwd D:\hexo
+74 error Windows_NT 6.1.7601
+75 error argv "D:\\Program Files\\nodejs\\node.exe" "D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "hexo-asset-image" "--save" "--force"
+76 error node v9.11.1
+77 error npm  v2.14.7
+78 error code MODULE_NOT_FOUND
+79 error Cannot find module 'internal/util/types'
+80 error If you need help, you may report this error at:
+80 error     <https://github.com/npm/npm/issues>
+81 verbose exit [ 1, true ]
