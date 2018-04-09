@@ -7,7 +7,11 @@ install:
 
 
 before_script:
+  - npm install hexo-fs --save
+  - npm install hexo-filter-flowchart --save
   - npm install hexo-generator-json-content --save
+  - npm install hexo-generator-search --save
+  - npm install hexo-renderer-mathjax --save
 
 script:
   - hexo g
