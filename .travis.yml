@@ -24,7 +24,7 @@ after_script:
 
 branches:
   only:
-    - blog-source
+    - hexo
 env:
  global:
    - GH_REF: github.com/daomengkiller/daomengkiller.github.io.git
