@@ -1,204 +1,241 @@
-require([], function (){
+(function (w, d) {
+    var body = $('body, html'),
+        toc = $("#post-toc"),
+        headerMenu = $("#header-menu"),
+        backTop = $("#sidebar-top"),
+        search = $('#sidebar-search'),
+        searchWrap = $('.search-wrap'),
+        tags = $("#sidebar-menu-box-tags"),
+        mobileTags = $("#mobile-header-container-tags"),
+        categories = $("#sidebar-menu-box-categories"),
+        sideMenuBox = $("#sidebar-menu-box"),
+        mobileHeaderMenu = $("#mobile-header-menu-nav"),
+        _mobileHeaderMenuLocked = false,
+        sideMenuBoxIsOpen = true,
+        clientHeight = d.documentElement.clientHeight; //获取可视区的高度
+    var Blog = {
+        showHeaderMenu: function (scrollTop) {
+            if (scrollTop > clientHeight * 0.1) {
+                headerMenu.removeClass("slide-down");
+                headerMenu.addClass("slide-up");
+            } else {
+                headerMenu.removeClass("slide-up");
+                headerMenu.addClass("slide-down");
+            }
+        },
+        showBackTop: function (scrollTop) {
+            backTop.css('display', (scrollTop > clientHeight) ? "block" : "none");
+        },
+        setTags: function (tags) {
+            var labels = tags.find("a");
+            labels.css({"font-size" : "15px"});
+            for(var i = 0, len = labels.length; i < len; i++){
+                var num = labels.eq(i).html().length % 5 +1;
+                labels[i].className = "";
+                labels.eq(i).addClass("color"+num);
+            }
+        },
+        setCategories: function () {
+            var labels = categories.find("a");
+            labels.css({"font-size" : "15px"});
+            for(var i = 0, len = labels.length; i < len; i++){
+                var num = labels.eq(i).html().length % 5 +1;
+                labels[i].className = "";
+                labels.eq(i).addClass("color"+num);
+            }
+        },
+        showSidebarBox: function (status) {
+            if (status) {
+                sideMenuBox.animate({
+                    height:'162px',
+                    opacity:'1'
+                }, 300);
+            } else {
+                sideMenuBox.animate({
+                    height:'0px',
+                    opacity:'0'
+                }, 300);
+            }
+        },
+        showToc: function (scrollTop) {
+            if (scrollTop / clientHeight >= 0.4) {
+                toc.removeClass("post-toc-top");
+                toc.addClass("post-toc-not-top");
+            } else {
+                toc.removeClass("post-toc-not-top");
+                toc.addClass("post-toc-top");
+            }
+        },
+        showMobileHeaderMenu: function (status) {
+            if (_mobileHeaderMenuLocked) {
+                return false;
+            }
+            if (status) {
+                mobileHeaderMenu.addClass("mobile-header-menu-nav-in");
+            } else {
+                mobileHeaderMenu.removeClass("mobile-header-menu-nav-in")
+            }
+        },
+        hideMask: function (target) {
+            var mask = $('.mask');
+            mask.removeClass('in');
+            if (target) {
+                target.removeClass('in')
+            }
+        },
+        share: function () {
+            var shareSub = $('#share-sub');
+            if (shareSub) {
+                var shareList = $('#share-list'),
+                    wxFab = $('#wxFab'),
+                    close = $('#wxShare-close'),
+                    mask = $('.mask');
+                shareSub.click(function () {
+                    if (shareList.hasClass('in')) {
+                        shareList.removeClass('in');
+                    } else {
+                        shareList.addClass('in');
+                    }
+                });
+                wxFab.click(function () {
+                    var wxShare = $('#wxShare');
+                    wxShare.addClass('in ready');
+                    mask.addClass('in');
+                });
+                close.click(function () {
+                    Blog.hideMask($('#wxShare'));
+                });
+                mask.click(function () {
+                    Blog.hideMask($('#wxShare'));
+                });
+            }
+        },
+        reward: function () {
+            var reward = $('#reward'),
+                close = $('#reward-close'),
+                rewardCode = $('#rewardCode'),
+                rewardCheck = $('.reward-select-item'),
+                mask = $('.mask');
+            if (reward) {
+                var rewardBtn = $('#rewardBtn');
+                rewardBtn.click(function () {
+                    reward.addClass('in ready');
+                    mask.addClass('in');
+                });
+                rewardCheck.click(function () {
+                    $(this).addClass('checked').siblings(rewardCheck).removeClass('checked');
+                    rewardCode.attr('src', $(this).attr('data-id') === 'wechat' ? this.dataset.wechat : this.dataset.alipay);
+                });
+                close.click(function () {
+                    Blog.hideMask(reward);
+                });
+                mask.click(function () {
+                    Blog.hideMask(reward);
+                });
+            }
+        },
+    };
 
-    var isMobileInit = false;
-    var loadMobile = function(){
-        require([yiliaConfig.rootUrl + 'js/mobile.js'], function(mobile){
-            mobile.init();
-            isMobileInit = true;
-        })
-    }
-    var isPCInit = false;
-    var loadPC = function(){
-        require([yiliaConfig.rootUrl + 'js/pc.js'], function(pc){
-            pc.init();
-            isPCInit = true;
-        })
-    }
-
-    var browser = {
-        versions: function() {
-        var u = window.navigator.userAgent;
-        return {
-            trident: u.indexOf('Trident') > -1, //IE内核
-            presto: u.indexOf('Presto') > -1, //opera内核
-            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-            iPad: u.indexOf('iPad') > -1, //是否为iPad
-            webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
-            weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
-            };
-        }()
-    }
-
-    $(window).bind("resize", function() {
-        if (isMobileInit && isPCInit) {
-            $(window).unbind("resize");
-            return;
-        }
-        var w = $(window).width();
-        if (w >= 700) {
-            loadPC();
-        } else {
-            loadMobile();
-        }
+    //初始化搜索数据
+    initSearch();
+    //搜索点击事件
+    search.click(function () {
+        searchWrap.css('top','50%');
+        searchWrap.css('marginTop','-80px');
+        searchWrap.css('opacity','1');
+    });
+    $('.search-close').click(function(){
+        searchWrap.css('top','0');
+        searchWrap.css('opacity','0');
+        $('#search-container').removeClass('search-container-show');
     });
 
-    if(!!browser.versions.mobile || $(window).width() < 800){
-        loadMobile();
-    } else {
-        loadPC();
-    }
-
-    resetTags = function(){
-        var tags = $(".tagcloud a");
-        for(var i = 0; i < tags.length; i++){
-            var num = Math.floor(Math.random()*7);
-            tags.eq(i).addClass("color" + num);
-        }
-        $(".article-category a:nth-child(-n+2)").attr("class", "color0");
-    }
-
-    // fancyBox
-    if(!!yiliaConfig.fancybox){
-        require([yiliaConfig.fancybox_js], function(pc){
-            var isFancy = $(".isFancy");
-            if(isFancy.length != 0){
-                var imgArr = $(".article-inner img");
-                for(var i=0,len=imgArr.length;i<len;i++){
-                    var src = imgArr.eq(i).attr("src");
-                    var title = imgArr.eq(i).attr("alt");
-                    if(typeof(title) == "undefined"){
-                        var title = imgArr.eq(i).attr("title");
-                    }
-                    var width = imgArr.eq(i).attr("width");
-                    var height = imgArr.eq(i).attr("height");
-                    imgArr.eq(i).replaceWith("<a href='"+src+"' title='"+title+"' rel='fancy-group' class='fancy-ctn fancybox'><img src='"+src+"' width="+width+" height="+height+" title='"+title+"' alt='"+title+"'></a>");
-                }
-                $(".article-inner .fancy-ctn").fancybox({ type: "image" });
-            }
-        })
-    }
-
-    // Animate on Homepage
-    if(!!yiliaConfig.animate) {
-        if(!!yiliaConfig.isHome) {
-            require([yiliaConfig.scrollreveal], function (ScrollReveal) {
-                var animationNames = [
-                "pulse", "fadeIn","fadeInRight", "flipInX", "lightSpeedIn","rotateInUpLeft", "slideInUp","zoomIn",
-                ],
-                len = animationNames.length,
-                randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
-
-                // Fallback (CSS3 keyframe, requestAnimationFrame)
-                if (!window.requestAnimationFrame) {
-                    $('.body-wrap > article').css({opacity: 1});
-                    if (navigator.userAgent.match(/Safari/i)) {
-                        function showArticle(){
-                            $(".article").each(function(){
-                                if( $(this).offset().top <= $(window).scrollTop()+$(window).height() && !($(this).hasClass('show')) ) {
-                                    $(this).removeClass("hidden").addClass("show");
-                                    $(this).addClass("is-hiddened");
-                                } else {
-                                    if(!$(this).hasClass("is-hiddened")) {
-                                        $(this).addClass("hidden");
-                                    }
-                                }
-                            })
-                        }
-                        $(window).on('scroll', function(){
-                            showArticle();
-                        });
-                        showArticle();
-                    }
-                    return;
-                }
-
-                var animateScope = ".body-wrap > article";
-                var $firstArticle = $(".body-wrap > article:first-child");
-                if ($firstArticle.height() > $(window).height()) {
-                    var animateScope = ".body-wrap > article:not(:first-child)";
-                    $firstArticle.css({opacity: 1});
-                }
-                ScrollReveal({
-                    duration: 0,
-                    afterReveal: function (domEl) {
-                        $(domEl).addClass('animated ' + randomAnimationName).css({opacity: 1})
-                    }
-                }).reveal(animateScope);
-            })
+    //tags | 标签
+    Blog.setTags(tags);//pc
+    Blog.setTags(mobileTags);//mobile
+    //categories | 类别
+    Blog.setCategories();
+    //类别展示
+    $("#sidebar-category").click(function (e) {
+        tags.css('display', 'none');
+        categories.css('display', 'block');
+        e.stopPropagation();
+        if (sideMenuBoxIsOpen) {
+            Blog.showSidebarBox(true);
+            sideMenuBoxIsOpen = false;
         } else {
-            $('.body-wrap > article').css({opacity: 1});
+            Blog.showSidebarBox(false);
+            sideMenuBoxIsOpen = true;
         }
+    });
+    //标签展示
+    $("#sidebar-tag").click(function (e) {
+        tags.css('display', 'block');
+        categories.css('display', 'none');
+        e.stopPropagation();
+        if (sideMenuBoxIsOpen) {
+            Blog.showSidebarBox(true);
+            sideMenuBoxIsOpen = false;
+        } else {
+            Blog.showSidebarBox(false);
+            sideMenuBoxIsOpen = true;
+        }
+    });
+    //点击菜单区域不能关闭菜单
+    sideMenuBox.click(function (e) {
+        e.stopPropagation();
+        if (sideMenuBoxIsOpen) {
+            return false;
+        }
+    });
+    //点击close按钮关闭菜单
+    $(".sidebar-menu-box-close").click(function() {
+        Blog.showSidebarBox(false);
+        sideMenuBoxIsOpen = true;
+    });
+
+    //回到顶部点击事件
+    backTop.click(function () {
+        body.animate({
+            scrollTop: 0
+        }, 500);
+    });
+
+    //获取滚动事件
+    d.addEventListener('scroll', function () {
+        var scrollTop = d.documentElement.scrollTop || d.body.scrollTop;
+        Blog.showHeaderMenu(scrollTop);
+        Blog.showBackTop(scrollTop);
+        Blog.showToc(scrollTop);
+    }, false);
+    
+    //Mobile Menu
+    $(".mobile-header-menu-button").click(function () {
+        if (_mobileHeaderMenuLocked) {
+            return false;
+        }
+        Blog.showMobileHeaderMenu(true);
+
+        _mobileHeaderMenuLocked = true;
+
+        window.setTimeout(function() {
+            _mobileHeaderMenuLocked = false;
+        }, 350);
+    });
+    
+    //Share
+    if (w.mihoConfig.share) {
+        Blog.share();
     }
 
-    // TOC
-    if (yiliaConfig.toc) {
-        require(['toc'], function(){ })
+    //Reward
+    if (w.mihoConfig.reward === 1 || w.mihoConfig.reward === 2) {
+        Blog.reward();
     }
-
-    // Random Color 边栏顶部随机颜色
-    var colorList = ["#6da336", "#ff945c", "#66CC66", "#99CC99", "#CC6666", "#76becc", "#c99979", "#918597", "#4d4d4d"];
-    var id = Math.ceil(Math.random()*(colorList.length-1));
-    // PC
-    $("#container .left-col .overlay").css({"background-color": colorList[id],"opacity": .3});
-    // Mobile
-    $("#container #mobile-nav .overlay").css({"background-color": colorList[id],"opacity": .7});
-
-    // Table
-    $("table").wrap("<div class='table-area'></div>");
-
-    // Hide Comment Button
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        }
-    })
-
-    // Hide Labels
-    if(yiliaConfig.isArchive || yiliaConfig.isTag || yiliaConfig.isCategory) {
-        $(document).ready(function() {
-            $("#footer").after("<button class='hide-labels'>TAGS</button>");
-            $(".hide-labels").click(function() {
-                $(".article-info").toggle(200);
-            })
-        })
-    }
-
-    // Task lists in markdown
-    $('ul > li').each(function() {
-        var taskList = {
-            field: this.textContent.substring(0, 2),
-            check: function(str) {
-                var re = new RegExp(str);
-                return this.field.match(re);
-            }
-        }
-
-        var string = ["[ ]", ["[x]", "checked"]];
-        var checked = taskList.check(string[1][0]);
-        var unchecked = taskList.check(string[0]);
-
-        var $current = $(this);
-        function update(str, check) {
-            var click = ["disabled", ""];
-            $current.html($current.html().replace(
-              str, "<input type='checkbox' " + check + " " + click[1] + " >")
-            )
-        }
-
-        if (checked || unchecked) {
-            this.classList.add("task-list");
-            if (checked) {
-                update(string[1][0], string[1][1]);
-                this.classList.add("check");
-            } else {
-                update(string[0], "");
-            }
-        }
-    })
-
-})
+    //body
+    body.click(function () {
+        Blog.showSidebarBox(false);
+        sideMenuBoxIsOpen = true;
+        Blog.showMobileHeaderMenu(false);
+    });
+})(window, document);
